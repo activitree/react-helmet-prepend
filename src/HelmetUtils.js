@@ -260,7 +260,7 @@ const reducePropsToState = propsList => ({
 const rafPolyfill = (() => {
     let clock = Date.now();
 
-    return (callback: Function) => {
+    return callback => {
         const currentTime = Date.now();
 
         if (currentTime - clock > 16) {
@@ -274,7 +274,7 @@ const rafPolyfill = (() => {
     };
 })();
 
-const cafPolyfill = (id: string | number) => clearTimeout(id);
+const cafPolyfill = id => clearTimeout(id);
 
 const requestAnimationFrame =
     typeof window !== "undefined"

@@ -1,7 +1,7 @@
 {
-  "name": "react-helmet",
+  "name": "@activitree/react-helmet-prepend",
   "description": "A document head manager for React",
-  "version": "6.1.0",
+  "version": "6.1.1",
   "main": "./lib/Helmet.js",
   "module": "./es/Helmet.js",
   "author": "NFL <engineers@nfl.com>",
@@ -12,7 +12,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nfl/react-helmet"
+    "url": "https://github.com/activitree/react-helmet-prepend.git"
   },
   "keywords": [
     "react-helmet",
@@ -38,14 +38,16 @@
     "react-side-effect": "^2.1.1"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-eslint": "^10.1.0",
-    "babel-plugin-external-helpers": "^6.22.0",
-    "babel-plugin-istanbul": "^6.0.0",
+    "@babel/core": "^7.15.5",
+    "@babel/eslint-parser": "^7.15.7",
+    "@babel/eslint-plugin": "^7.14.5",
+    "@babel/plugin-proposal-optional-chaining": "^7.14.5",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@babel/preset-env": "^7.15.6",
+    "@babel/preset-react": "^7.14.5",
+    "@babel/runtime": "^7.15.4",
     "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
     "chai": "^4.3.4",
     "codecov": "^3.8.3",
     "conventional-changelog-cli": "^2.1.1",
@@ -93,7 +95,8 @@
     "pretest": "npm run clean && npm run lint",
     "commit": "git-cz",
     "build": "rollup -c",
-    "prepublish": "npm run build"
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run build"
   },
   "config": {
     "commitizen": {
