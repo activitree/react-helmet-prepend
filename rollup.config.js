@@ -1,6 +1,6 @@
-import babel from "rollup-plugin-babel";
+const babel = require("rollup-plugin-babel")
 
-import pkg from "./package.json";
+const pkg = require("./package.json")
 
 const baseConfig = {
     input: "src/Helmet.js",
@@ -14,8 +14,7 @@ const baseConfig = {
         ...Object.keys(pkg.peerDependencies)
     ]
 };
-
-export default [
+ const options = [
     Object.assign(
         {
             output: {
@@ -35,3 +34,5 @@ export default [
         baseConfig
     )
 ];
+
+module.exports = options
