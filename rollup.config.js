@@ -23,7 +23,8 @@ const baseConfig = {
             }
         },
         baseConfig
-    ),
+    )
+   /*,
     Object.assign(
         {
             output: {
@@ -33,6 +34,7 @@ const baseConfig = {
         },
         baseConfig
     )
+    */
 ];
 
 module.exports = options

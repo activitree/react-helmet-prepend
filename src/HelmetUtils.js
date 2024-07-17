@@ -218,6 +218,11 @@ const reducePropsToState = propsList => ({
         HELMET_PROPS.ENCODE_SPECIAL_CHARACTERS
     ),
     htmlAttributes: getAttributesFromPropsList(ATTRIBUTE_NAMES.HTML, propsList),
+    title: getTitleFromPropsList(propsList),
+    titleAttributes: getAttributesFromPropsList(
+      ATTRIBUTE_NAMES.TITLE,
+      propsList
+    ),
     linkTags: getTagsFromPropsList(
         TAG_NAMES.LINK,
         [TAG_PROPERTIES.REL, TAG_PROPERTIES.HREF],
@@ -248,11 +253,6 @@ const reducePropsToState = propsList => ({
     styleTags: getTagsFromPropsList(
         TAG_NAMES.STYLE,
         [TAG_PROPERTIES.CSS_TEXT],
-        propsList
-    ),
-    title: getTitleFromPropsList(propsList),
-    titleAttributes: getAttributesFromPropsList(
-        ATTRIBUTE_NAMES.TITLE,
         propsList
     )
 });
@@ -318,6 +318,8 @@ const handleClientStateChange = newState => {
 
 const commitTagChanges = (newState, cb) => {
     const {
+        title,
+        titleAttributes,
         baseTag,
         bodyAttributes,
         htmlAttributes,
@@ -326,9 +328,7 @@ const commitTagChanges = (newState, cb) => {
         noscriptTags,
         onChangeClientState,
         scriptTags,
-        styleTags,
-        title,
-        titleAttributes
+        styleTags
     } = newState;
     updateAttributes(TAG_NAMES.BODY, bodyAttributes);
     updateAttributes(TAG_NAMES.HTML, htmlAttributes);
@@ -474,7 +474,10 @@ const updateTags = (type, tags) => {
     }
 
     oldTags.forEach(tag => tag.parentNode.removeChild(tag));
-    newTags.forEach(tag => headElement.prepend(tag));
+    const target = document.getElementById('append-helmet')
+    newTags.forEach(tag => {
+      target.after(tag)
+    });
 
     return {
         oldTags,
@@ -617,41 +620,8 @@ const getMethodsForTag = (type, tags, encode) => {
     }
 };
 
-const mapStateOnServer = ({
-    baseTag,
-    bodyAttributes,
-    encode,
-    htmlAttributes,
-    linkTags,
-    metaTags,
-    noscriptTags,
-    scriptTags,
-    styleTags,
-    title = "",
-    titleAttributes
-}) => ({
-    base: getMethodsForTag(TAG_NAMES.BASE, baseTag, encode),
-    bodyAttributes: getMethodsForTag(
-        ATTRIBUTE_NAMES.BODY,
-        bodyAttributes,
-        encode
-    ),
-    htmlAttributes: getMethodsForTag(
-        ATTRIBUTE_NAMES.HTML,
-        htmlAttributes,
-        encode
-    ),
-    link: getMethodsForTag(TAG_NAMES.LINK, linkTags, encode),
-    meta: getMethodsForTag(TAG_NAMES.META, metaTags, encode),
-    noscript: getMethodsForTag(TAG_NAMES.NOSCRIPT, noscriptTags, encode),
-    script: getMethodsForTag(TAG_NAMES.SCRIPT, scriptTags, encode),
-    style: getMethodsForTag(TAG_NAMES.STYLE, styleTags, encode),
-    title: getMethodsForTag(TAG_NAMES.TITLE, {title, titleAttributes}, encode)
-});
-
 export {convertReactPropstoHtmlAttributes};
 export {handleClientStateChange};
-export {mapStateOnServer};
 export {reducePropsToState};
 export {requestAnimationFrame};
 export {warn};
