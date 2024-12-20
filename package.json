@@ -1,7 +1,7 @@
 {
   "name": "@activitree/react-helmet-prepend",
   "description": "A document head manager for React",
-  "version": "6.1.6",
+  "version": "6.1.7",
   "main": "./lib/Helmet.js",
   "author": "NFL <engineers@nfl.com>",
   "contributors": [
@@ -28,7 +28,7 @@
     "style"
   ],
   "peerDependencies": {
-    "react": ">18.3.1"
+    "react": ">18.3.0"
   },
   "dependencies": {
     "object-assign": "^4.1.1",
